@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="ko">
+<head>
+
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q94ZP725H9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q94ZP725H9');
+</script>
+
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>SION / MUSIC PORTFOLIO</title>
+	<meta name="description" content="Music portfolio" />
+
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600&family=Noto+Sans+KR:wght@400;600&display=swap" rel="stylesheet" />
+
+	<style>
+		:root {
+			color-scheme: dark;
+		}
+
+		html, body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			background: #000;
+			color: #eaeaea;
+			font-family: "Noto Sans KR", "Noto Sans JP", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+			font-size: 18px;
+			line-height: 1.5;
+		}
+
+		.wrap {
+			max-width: 980px;
+			margin: 0 auto;
+			padding: 28px 16px 56px;
+		}
+
+		.topline {
+			display: flex;
+			align-items: baseline;
+			justify-content: space-between;
+			gap: 16px;
+			padding: 154px 0 154px;
+			margin-bottom: 18px;
+		}
+
+		.section-title {
+			margin: 0 0 12px;
+			font-size: 16px;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: #fff;
+		}
+
+		.intro {
+			min-width: 0;
+		}
+
+		.title {
+			margin: 0;
+			font-size: clamp(26px, 4vw, 38px);
+			letter-spacing: 0.01em;
+			text-transform: none;
+			color: #fff;
+			font-weight: 700;
+		}
+
+		.subtitle {
+			margin: 6px 0 0;
+			font-size: clamp(16px, 1.6vw, 20px);
+			color: #b9b9b9;
+		}
+
+		.email {
+			margin: 8px 0 0;
+			font-size: 16px;
+			color: #9a9a9a;
+		}
+
+		.email a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		.email a:hover {
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+		.count {
+			margin: 0;
+			font-size: 13px;
+			color: #9a9a9a;
+		}
+
+		.list {
+			display: block;
+			border-top: 1px solid #202020;
+		}
+
+		.row {
+			display: grid;
+			grid-template-columns: 240px 1fr;
+			gap: 14px;
+			padding: 14px 0;
+			border-bottom: 1px solid #202020;
+		}
+
+		.thumb {
+			width: 240px;
+			aspect-ratio: 16 / 9;
+			border-radius: 10px;
+			overflow: hidden;
+			background: #000;
+			border: 1px solid #1e1e1e;
+			position: relative;
+		}
+
+		.thumb.is-missing {
+			background: #000;
+		}
+
+		.thumb img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			filter: saturate(0.92) contrast(1.02);
+		}
+
+		.meta {
+			min-width: 0;
+		}
+
+		.name {
+			margin: 0;
+			font-size: 22px;
+			color: #fff;
+			font-weight: 600;
+			word-break: break-word;
+		}
+
+		.badge {
+			display: inline-block;
+			margin-left: 8px;
+			padding: 2px 8px;
+			border: 1px solid #202020;
+			border-radius: 999px;
+			background: #000;
+			color: #b9b9b9;
+			font-size: 12px;
+			line-height: 1.2;
+			letter-spacing: 0.02em;
+			vertical-align: middle;
+		}
+
+		.artist {
+			margin: 4px 0 0;
+			font-size: 18px;
+			color: #b9b9b9;
+		}
+
+		.desc {
+			margin: 10px 0 0;
+			font-size: 17px;
+			color: #9a9a9a;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.dot {
+			width: 3px;
+			height: 3px;
+			border-radius: 999px;
+			background: #4a4a4a;
+			display: inline-block;
+		}
+
+		.row a {
+			color: inherit;
+			text-decoration: none;
+			display: contents;
+		}
+
+		.row:hover .thumb {
+			border-color: #2a2a2a;
+		}
+
+		.row:hover .name {
+			text-decoration: underline;
+			text-decoration-color: #3a3a3a;
+			text-underline-offset: 4px;
+		}
+
+		.empty {
+			padding: 18px 0;
+			color: #9a9a9a;
+			font-size: 13px;
+		}
+
+		.credit {
+			margin: 28px 0 0;
+			padding-top: 18px;
+			border-top: 1px solid #202020;
+			font-size: 13px;
+			color: #9a9a9a;
+			text-align: center;
+		}
+
+		.credit a {
+			color: inherit;
+			text-decoration: none;
+		}
+
+		.credit a:hover {
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
+		@media (max-width: 560px) {
+			.topline {
+				flex-direction: column;
+				align-items: flex-start;
+				padding: 38px 0 28px;
+			}
+
+			.row {
+				grid-template-columns: 170px 1fr;
+			}
+
+			.thumb {
+				width: 170px;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			* {
+				scroll-behavior: auto !important;
+				transition: none !important;
+				animation: none !important;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<main class="wrap">
+		<div class="topline">
+			<div class="intro">
+				<h1 class="title">シオン (@sionuu)</h1>
+				<p class="subtitle">Inst Arranger / Pianist / Mix Engineer</p>
+				<p class="email"><a href="mailto:sion@sionuu.com">sion@sionuu.com</a></p>
+			</div>
+			<p class="count" id="count"></p>
+		</div>
+
+		<h2 class="section-title">Music Work</h2>
+
+		<section class="list" id="list"></section>
+		<div class="empty" id="empty" hidden>아직 등록된 작업물이 없습니다.</div>
+		<footer class="credit">Created by <a href="https://twitter.com/sionuu" rel="me">@sionuu</a></footer>
+	</main>
+
+	<script>
+		const portfolioData = [
+			{
+				title: "アンノウン・マザーグース",
+				artist: "白雪",
+				youtubeLink: "https://www.nicovideo.jp/watch/sm46838977",
+				coverImage: "assets/images/work/057_unknown-mother-goose_sm46838977.jpg",
+				description: "Inst Arrange",
+			},
+			{
+				title: "Yorushika - 晴る(맑음)",
+				artist: "담유이 (허니즈)",
+				youtubeLink: "https://www.youtube.com/watch?v=jLPW_nF1MUc",
+				coverImage: "assets/images/work/056_haru_jLPW_nF1MUc.jpg",
+				description: "Mix",
+			},
+			{
+				title: "행운을 빌어 줘 (A journey)",
+				artist: "POPOPOPO (ACAXIA)",
+				youtubeLink: "https://www.youtube.com/watch?v=SvYoWd05s3E",
+				coverImage: "assets/images/work/055_a-journey_SvYoWd05s3E.jpg",
+				description: "Mix",
+			},
+			{
+				title: "Departure",
+				artist: "dtto, アルランディス, アキ・ローゼンタール, 常闇トワ, 夜乃くろむ, 小柳ロウ, 鬼ヶ谷テン",
+				youtubeLink: "https://www.youtube.com/watch?v=FhmHBJkXxto",
+				coverImage: "assets/images/work/054_departure_FhmHBJkXxto.jpg",
+				description: "Inst Arrange",
+			},
+			{
+				title: "I Really Want to Stay At Your House (Cyberpunk: Edgerunners)",
+				artist: "Juno Umezono × dtto.",
+				youtubeLink: "https://www.youtube.com/watch?v=RQ4HAZDtSEE",
+				coverImage: "assets/images/work/052_i-really-want-to-stay-at-your-house_RQ4HAZDtSEE.jpg",
+				description: "Inst Full Arrange",
+			},
+			{
+				title: "Bunny Girl (Cover)",
+				artist: "망내 MangNae (Honeyz)",
+				youtubeLink: "https://www.youtube.com/watch?v=QCwJCZGB91U",
+				coverImage: "assets/images/work/051_bunny-girl-cover_QCwJCZGB91U.jpg",
+				description: "Inst Full Arrange, Mix",
+			},
+			{
+				title: "わたしの恋はホッチキス",
+				artist: "POPOPOPO (ACAXIA)",
+				youtubeLink: "https://www.youtube.com/watch?v=zhwgLCb4Kgw",
+				coverImage: "assets/images/work/049_watashi-no-koi-wa-hotchkiss_zhwgLCb4Kgw.jpg",
+				description: "Inst Arrange, Mix",
+				isNew: true,
+			},
+			{
+				title: "愛言葉V",
+				artist: "violeta mone",
+				youtubeLink: "https://www.youtube.com/watch?v=DUD2u6kJfsI",
+				coverImage: "assets/images/work/050_aikotoba-v_DUD2u6kJfsI.jpg",
+				description: "Mix / Mastering",
+				isNew: true,
+			},
+			{
+				title: "Henceforth",
+				artist: "솜 달",
+				youtubeLink: "https://www.youtube.com/watch?v=EZdiDlbuJNA",
+				coverImage: "assets/images/work/053_henceforth_EZdiDlbuJNA.jpg",
+				description: "Mix",
+			},
+			{
+				title: "World Is Mine (CPK! Remix)",
+				artist: "Violeta Mone",
+				youtubeLink: "https://www.youtube.com/watch?v=NXi9jb5Uglw",
+				coverImage: "assets/images/work/048_world-is-mine-remix_NXi9jb5Uglw.jpg",
+				description: "Mix / Mastering",
+			},
+			{
+				title: "どりーみんチュチュ (emon(Tes.))",
+				artist: "dtto. / 春茶 / 秋雪こはく / 天鬼ぷるる / とおこ",
+				youtubeLink: "https://www.youtube.com/watch?v=qpeLXZKYrtw",
+				coverImage: "assets/images/work/000_dreamin-chuchu_qpeLXZKYrtw.jpg",
+				description: "Inst Arrange",
+			},
+			{
+				title: "ライラック",
+				artist: "dtto. / 巫神こん(Mikami Kon)",
+				youtubeLink: "https://www.youtube.com/watch?v=UBPvBkDBr1k",
+				coverImage: "assets/images/work/001_lilac_UBPvBkDBr1k.jpg",
+				description: "Inst Arrange",
+			},
+			{
+				title: "IRIS OUT",
+				artist: "dtto.",
+				youtubeLink: "https://www.youtube.com/watch?v=FBQ0qrK0ZpI",
+				coverImage: "assets/images/work/001_iris-out_0d7759411f.jpg",
+				description: "Inst Arrange",
+			},
+			{
+				title: "ファタール",
+				artist: "Bishamon Kuroneko, dtto.",
+				youtubeLink: "https://www.youtube.com/watch?v=dcVyHvY0WPE",
+				coverImage: "assets/images/work/032_fatal_dcVyHvY0WPE.jpg",
+				description: "Inst Arrange / Mix / Mastering",
+			},
+			{
+				title: "New World (鎌田純子)",
+				artist: "dtto.",
+				youtubeLink: "https://www.youtube.com/watch?v=wishhBIAZ0U",
+				coverImage: "assets/images/work/002_new-world-_d83cf4455c.jpg",
+				description: "Inst Arrange",
+			},
+			{
+				title: "浮気したらあかんで (コレサワ)",
+				artist: "dtto.",
+				youtubeLink: "https://www.youtube.com/watch?v=VKUTODP-S5k",
+				coverImage: "assets/images/work/003_-_11c57d8403.jpg",
+				description: "Inst Arrange / Mix / Mastering",
+			},
+			{
+				title: "プロポーズ",
+				artist: "Amaris Sayo / AStars",
+				youtubeLink: "https://www.youtube.com/watch?v=xzHGicAT8LU",
+				coverImage: "assets/images/work/004_item_d692928965.jpg",
+				description: "Mix / Mastering",
+			},
+			{
+				title: "怪獣の花唄 (Vaundy)",
+				artist: "흰눈(WhiteSnow)",
+				youtubeLink: "https://www.youtube.com/watch?v=xN1QSQ4XgQU",
+				coverImage: "assets/images/work/005_-vaundy_53e8732889.jpg",
+				description: "Inst Arrange / Mix / Mastering",
+			},
+			{
+				title: "おとぎ話 (Fairy Tale)",
+				artist: "Bishamon kuroneko / AStars",
+				youtubeLink: "https://www.youtube.com/watch?v=oC6wAkfnuis",
+				coverImage: "assets/images/work/006_-fairy-tale_b0b5a2acbe.jpg",
+				description: "Mix / Mastering",
+			},
+			{
+				title: "Magnetic",
+				artist: "yeonHARI",
+				youtubeLink: "https://www.youtube.com/watch?v=ZuwzO-C42uw",
+				coverImage: "assets/images/work/007_magnetic_200764b76e.jpg",
+				description: "Arrange",
+			},
+			{
+				title: "アイネクライネ",
+				artist: "INE(ISEGYE IDOL)",
+				youtubeLink: "https://www.youtube.com/watch?v=yXQUBzTwYa4",
+				coverImage: "assets/images/work/008_-_de12b4141d.jpg",
+				description: "Keyboards",
+			},
+			{
+				title: "EVER PURPLE",
+				artist: "INE(ISEGYE IDOL) 1st Concert",
+				youtubeLink: "https://www.youtube.com/watch?v=aCa5qn11IrI",
+				coverImage: "assets/images/work/009_ever-purple_a6d79c5cd0.jpg",
+				description: "Arrange (2) / Piano",
+			},
+			{
+				title: "THIS IS ME",
+				artist: "LILPA(ISEGYE IDOL)X고정멤버",
+				youtubeLink: "https://www.youtube.com/watch?v=w29E_TCtotc",
+				coverImage: "assets/images/work/010_this-is-me_0d265f1c60.jpg",
+				description: "INST MIX / SFX",
+			},
+			{
+				title: "THE WORLD",
+				artist: "왕꿈틀이",
+				coverImage: "assets/images/work/011_-_26ff3432d2.jpg",
+				description: "Inst Arrange / Drum / Aux Keys",
+				youtubeLink: "https://www.youtube.com/watch?v=7nJpcF8K84I",
+			},
+			{
+				title: "晩餐歌",
+				artist: "yeonHARI",
+				youtubeLink: "https://www.youtube.com/watch?v=kW7FzECJ-WM",
+				coverImage: "assets/images/work/012_item_5ff51d7f06.jpg",
+				description: "INST Arrange / Key / Guitars",
+			},
+			{
+				title: "Let It Snow",
+				artist: "INE(ISEGYE IDOL)",
+				youtubeLink: "https://www.youtube.com/watch?v=tOGXQcitiMg",
+				coverImage: "assets/images/work/013_let-it-snow_fc80f05b0c.jpg",
+				description: "INST ARRANGE / Piano / Aux Keys",
+			},
+			{
+				title: "채운 (cloud iridescence)",
+				artist: "LEAVEN",
+				youtubeLink: "https://www.youtube.com/watch?v=4nDRv5IFMP4",
+				coverImage: "assets/images/work/014_item_fd6f81f137.jpg",
+				description: "INST ARRANGE / Piano / Digital Edit",
+			},
+			{
+				title: "LOVE SONG",
+				artist: "WAKTAVERSE",
+				youtubeLink: "https://www.youtube.com/watch?v=uvSIwq3JFuo",
+				coverImage: "assets/images/work/015_love-song_6ec2472b25.jpg",
+				description: "INST ARRANGE / Piano / Aux Keys",
+			},
+			{
+				title: "애상",
+				artist: "Jingburger (ISEGYE IDOL)",
+				coverImage: "assets/images/work/016_item_eca72ba603.jpg",
+				description: "INST ARRANGE / Piano / Aux Keys",
+				youtubeLink: "https://www.youtube.com/watch?v=CtJ0WuSGpVw",
+			},
+			{
+				title: "Tot Musica",
+				artist: "VIichan (ISEGYE IDOL)",
+				coverImage: "assets/images/work/017_tot-musica_2b96923844.jpg",
+				description: "Inst Arrange",
+				youtubeLink: "https://youtu.be/sP0E6y0gWxA",
+			},
+			{
+				title: "17さいのうた。",
+				artist: "Qua",
+				coverImage: "assets/images/work/018_17_0560ebccfd.jpg",
+				description: "Inst Arrange",
+				youtubeLink: "https://www.youtube.com/watch?v=HbthSGlhQ7o",
+			},
+			{
+				title: "紅蓮華 (鬼滅の刃 OP)",
+				artist: "GOSEGU (ISEGYE IDOL)",
+				coverImage: "assets/images/work/019_-op_b03e6df131.jpg",
+				description: "INST ARRANGE / Piano / Aux Keys",
+				youtubeLink: "https://www.youtube.com/watch?v=uG91iq0AzKM",
+			},
+			{
+				title: "Re:Dial",
+				artist: "HAKU0089",
+				coverImage: "assets/images/work/020_redial_e653109f37.png",
+				description: "Inst Arrange / Guitars / Aux Keys",
+				youtubeLink: "https://www.youtube.com/watch?v=Gce2fYnlw0w",
+			},
+			{
+				title: "STAY",
+				artist: "Jingburger (ISEGYE IDOL)",
+				coverImage: "assets/images/work/021_stay_b5ad8cdb50.jpg",
+				description: "Inst Arrange, Inst Mix",
+				youtubeLink: "https://www.youtube.com/watch?v=tT-kuonVzfY",
+			},
+			{
+				title: "사랑하긴 했었나요…",
+				artist: "VIichan (ISEGYE IDOL)",
+				coverImage: "assets/images/work/022_-_deb48b7eb4.jpg",
+				description: "Piano / Aux Keys",
+				youtubeLink: "https://www.youtube.com/watch?v=lLIpFxWtqCQ",
+			},
+			{
+				title: "눈사람 - 정승환",
+				artist: "yeonHARI",
+				coverImage: "assets/images/work/023_-_7f1ef101b4.jpg",
+				description: "Inst Arrange / Guitars / Aux Keys",
+				youtubeLink: "https://www.youtube.com/watch?v=IfOaIH-YvzI",
+			},
+			{
+				title: "고멤가요제 - STARLIGHT",
+				artist: "하와유(왁파고, 하쿠0089, 카르나르 융터르, ft.주르르)",
+				coverImage: "assets/images/work/024_-starlight_5ff9f95598.webp",
+				description: "Arrange, Piano",
+				youtubeLink: "https://www.youtube.com/watch?v=YwQkPlFlOJQ",
+			},
+			{
+				title: "볼빨간사춘기 - 나만, 봄",
+				artist: "Gosegu (ISEGYE IDOL)",
+				coverImage: "assets/images/work/025_-_57596b8352.jpg",
+				description: "Piano, String Arrange",
+				youtubeLink: "https://www.youtube.com/watch?v=SAJrAQGvOHE",
+			},
+			{
+				title: "Marigold",
+				artist: "MIRO, INE(ISEGYE IDOL)",
+				coverImage: "assets/images/work/026_item_bd07491d00.jpg",
+				description: "Arrange",
+				youtubeLink: "https://www.youtube.com/watch?v=KoNBf6IT0k0",
+			},
+			{
+				title: "별이 되지 않아도 돼 - 109",
+				artist: "Gosegu (ISEGYE IDOL)",
+				coverImage: "assets/images/work/027_-109_84f77d39a7.jpg",
+				description: "Arrange, Mix.",
+				youtubeLink: "https://www.youtube.com/watch?v=h5yU8WZsB9g",
+			},
+			{
+				title: "스타크래프트 고정멤버 대회 OP",
+				artist: "woowakgood",
+				coverImage: "assets/images/work/028_-op_a6ed7a8994.jpg",
+				description: "보조감독",
+				youtubeLink: "https://www.youtube.com/watch?v=9RtpwMf9n94",
+			},
+			{
+				title: "요루시카 - 봄도둑",
+				artist: "2022 우왁굳 단편영화제 출품작",
+				coverImage: "assets/images/work/030_-_f51cff69fc.jpg",
+				description: "Drums",
+				youtubeLink: "https://www.youtube.com/watch?v=PyGX0HJmdS8",
+			},
+			{
+				title: "기억해, 우리 - 메이플스토리 M 블랙헤븐 OST",
+				artist: "미로, 김바쏘",
+				coverImage: "assets/images/work/031_-m-ost_d091d1abe5.jpg",
+				description: "Piano",
+				youtubeLink: "https://www.youtube.com/watch?v=h3t7e8myzwQ",
+			},
+			{
+				title: "포니",
+				artist: "가루별",
+				coverImage: "assets/images/work/037_phony_oJsTLD6y_8A.jpg",
+				description: "Inst Arrange / Mix",
+				youtubeLink: "https://www.youtube.com/watch?v=oJsTLD6y_8A",
+			},
+			{
+				title: "투니버스 메들리",
+				artist: "waktaverse",
+				coverImage: "assets/images/work/033_-_bc89c445bc.jpg",
+				description: "Drums",
+				youtubeLink: "https://www.youtube.com/watch?v=OTkFJyn4mvc",
+			},
+			{
+				title: "그 날의 메아리",
+				artist: "MIRO, 밤푸딩, 윤솜(와타아메), 김바쏘, SINGJONG",
+				coverImage: "assets/images/work/034_-_119a9484eb.jpg",
+				description: "Piano",
+				youtubeLink: "https://www.youtube.com/watch?v=hKkT_sdqVds",
+			},
+			{
+				title: "바람기억 - 나얼",
+				artist: "yeonHARI",
+				coverImage: "assets/images/work/035_-_880158d0bd.jpg",
+				description: "Piano",
+				youtubeLink: "https://www.youtube.com/watch?v=TAyJ5eT1RJY",
+			},
+			{
+				title: "너를 생각해 - 주시크",
+				artist: "yeonHARI",
+				coverImage: "assets/images/work/036_-_b3c845ce43.jpg",
+				description: "Inst Arrange",
+				youtubeLink: "https://www.youtube.com/watch?v=vXI8fcJ6Jlk",
+			},
+			{
+				title: "리와인드",
+				artist: "가루별",
+				coverImage: "",
+				description: "Mix",
+				youtubeLink: "https://www.youtube.com/watch?v=oJsTLD6y_8A",
+			},
+			{
+				title: "너라는 별",
+				artist: "가루별",
+				coverImage: "assets/images/work/047_neoraneun-byeol_349QtNscUrQ.jpg",
+				description: "Inst Arrange / Mix / Mastering",
+				youtubeLink: "https://www.youtube.com/watch?v=349QtNscUrQ",
+			},
+			{
+				title: "피아노 배틀 (shorts)",
+				artist: "류으미",
+				coverImage: "assets/images/work/038_-shorts_cd6a4e5376.jpg",
+				description: "Piano",
+				youtubeLink: "https://www.youtube.com/watch?v=SW6RISVshm8",
+			},
+			{
+				title: "변사또가 떴다",
+				artist: "신나는 예술여행 마당극 경남국악관현악단",
+				coverImage: "assets/images/work/039_-_93accdde53.jpg",
+				description: "Live Record Engineer / Mix",
+				youtubeLink: "https://www.youtube.com/watch?v=X38fyqkLjRc",
+			},
+			{
+				title: "Ju. T'aime",
+				artist: "Jururu (ISEGYE IDOL)",
+				coverImage: "assets/images/work/040_ju.-taime_342b072fc2.jpg",
+				description: "Grow up - Drum",
+				youtubeLink: "https://www.youtube.com/watch?v=wmbN3BPIUbQ",
+			},
+			{
+				title: "위로해 (feat.6FU;)",
+				artist: "너해게",
+				coverImage: "assets/images/work/041_-feat.6fu_2ea9bfe5bc.jpg",
+				description: "Arrange / Piano",
+				youtubeLink: "https://www.youtube.com/watch?v=YDTIMfeHMF4",
+			},
+			{
+				title: "베텔기우스",
+				artist: "꽃감이",
+				coverImage: "assets/images/work/042_item_ec84ba7417.jpg",
+				description: "Inst(사용)",
+				youtubeLink: "https://www.youtube.com/watch?v=V2rnit-NhjU",
+			},
+			{
+				title: "ONE OK ROCK - We Are",
+				artist: "wangggumteuli",
+				coverImage: "assets/images/work/043_one-ok-rock-we-are_df7cd58857.jpg",
+				description: "INST",
+				youtubeLink: "https://www.youtube.com/watch?v=MZJKWYZm_-A",
+			},
+			{
+				title: "Pretender",
+				artist: "yeonHARI",
+				coverImage: "assets/images/work/044_pretender_bbf252e980.jpg",
+				description: "Arrange",
+				youtubeLink: "https://www.youtube.com/watch?v=9nzRk4_ZTYg",
+			},
+			{
+				title: "さくらんぼ",
+				artist: "Gosegu (ISEGYE IDOL)",
+				coverImage: "assets/images/work/045_item_2adfad24f3.jpg",
+				description: "Inst",
+				youtubeLink: "https://www.youtube.com/watch?v=7GyW2INMluY",
+			},
+			{
+				title: "Stand Up For Love",
+				artist: "구슬요 X 니즈 X 따린 X 씽구 X 얌",
+				coverImage: "assets/images/work/046_stand-up-for-love_b4384157ca.jpg",
+				description: "Drums Programming",
+				youtubeLink: "https://youtu.be/JMoLmb_oQs8",
+			},
+		];
+
+		const listEl = document.getElementById('list');
+		const emptyEl = document.getElementById('empty');
+		const countEl = document.getElementById('count');
+
+		function escapeHtml(text) {
+			return String(text)
+				.replaceAll('&', '&amp;')
+				.replaceAll('<', '&lt;')
+				.replaceAll('>', '&gt;')
+				.replaceAll('"', '&quot;')
+				.replaceAll("'", '&#39;');
+		}
+
+		function markThumbMissing(img) {
+			const wrapper = img.closest('.thumb');
+			if (wrapper) wrapper.classList.add('is-missing');
+			img.remove();
+		}
+
+		function looksLikeYoutubePlaceholder(sampleData) {
+			const data = sampleData.data;
+			const pixelCount = data.length / 4;
+			let grayishCount = 0;
+			let sum = 0;
+			let sumSq = 0;
+			let minL = 255;
+			let maxL = 0;
+
+			for (let i = 0; i < data.length; i += 4) {
+				const r = data[i];
+				const g = data[i + 1];
+				const b = data[i + 2];
+
+				const max = Math.max(r, g, b);
+				const min = Math.min(r, g, b);
+				if (max - min < 12) grayishCount += 1;
+
+				const l = (r + g + b) / 3;
+				sum += l;
+				sumSq += l * l;
+				if (l < minL) minL = l;
+				if (l > maxL) maxL = l;
+			}
+
+			const mean = sum / pixelCount;
+			const variance = sumSq / pixelCount - mean * mean;
+			const contrast = maxL - minL;
+			const grayFrac = grayishCount / pixelCount;
+
+			return grayFrac > 0.92 && contrast < 80 && variance < 900;
+		}
+
+		const youtubeOembedCache = new Map();
+
+		function getYoutubeLinkFromThumb(img) {
+			const a = img.closest('.row')?.querySelector('a');
+			if (!a) return '';
+			return a.href || '';
+		}
+
+		async function isYoutubeVideoPublic(youtubeLink) {
+			if (!youtubeLink) return null;
+			if (youtubeOembedCache.has(youtubeLink)) return youtubeOembedCache.get(youtubeLink);
+
+			const promise = fetch(
+				`https://www.youtube.com/oembed?url=${encodeURIComponent(youtubeLink)}&format=json`,
+				{ method: 'GET' },
+			)
+				.then((res) => res.ok)
+				.catch(() => null);
+
+			youtubeOembedCache.set(youtubeLink, promise);
+			return promise;
+		}
+
+		function maybeHideEllipsisThumb(img) {
+			const src = img.currentSrc || img.src;
+			if (!src) return;
+			if (!/ytimg\.com\//i.test(src) && !/img\.youtube\.com\//i.test(src)) return;
+
+			const probe = new Image();
+			probe.crossOrigin = 'anonymous';
+			probe.decoding = 'async';
+			probe.onload = () => {
+				try {
+					const canvas = document.createElement('canvas');
+					const w = 32;
+					const h = 18;
+					canvas.width = w;
+					canvas.height = h;
+					const ctx = canvas.getContext('2d', { willReadFrequently: true });
+					if (!ctx) return;
+					ctx.drawImage(probe, 0, 0, w, h);
+					const sample = ctx.getImageData(0, 0, w, h);
+					if (looksLikeYoutubePlaceholder(sample)) {
+						markThumbMissing(img);
+					}
+				} catch {
+					// If CORS blocks pixel reads, fallback to oEmbed check.
+					const link = getYoutubeLinkFromThumb(img);
+					isYoutubeVideoPublic(link).then((isPublic) => {
+						if (!img.isConnected) return;
+						if (isPublic === false) markThumbMissing(img);
+					});
+				}
+			};
+			probe.onerror = () => {
+				// If we can't probe it safely, fallback to oEmbed check.
+				const link = getYoutubeLinkFromThumb(img);
+				isYoutubeVideoPublic(link).then((isPublic) => {
+					if (!img.isConnected) return;
+					if (isPublic === false) markThumbMissing(img);
+				});
+			};
+			probe.src = src;
+		}
+
+		function render() {
+			countEl.textContent = ``;
+
+			if (!Array.isArray(portfolioData) || portfolioData.length === 0) {
+				emptyEl.hidden = false;
+				return;
+			}
+
+			const html = portfolioData.map((item) => {
+				const title = escapeHtml(item.title ?? '');
+				const artistRaw = String(item.artist ?? '');
+				const artist = escapeHtml(artistRaw);
+				const link = escapeHtml(item.youtubeLink ?? '#');
+				const coverRaw = String(item.coverImage ?? '');
+				const cover = escapeHtml(coverRaw);
+				const desc = escapeHtml(item.description ?? '');
+				const badge = item.isNew ? `<span class="badge">new !</span>` : '';
+
+				const thumbClass = cover ? 'thumb' : 'thumb is-missing';
+				const thumbInner = cover ? `<img src="${cover}" alt="${title}" loading="lazy" />` : '';
+
+				return `
+					<div class="row">
+						<a href="${link}" target="_blank" rel="noopener noreferrer">
+							<div class="${thumbClass}">${thumbInner}</div>
+							<div class="meta">
+								<p class="name">${title}${badge}</p>
+								<p class="artist">${artist}</p>
+								<p class="desc"><span class="dot"></span><span>${desc}</span></p>
+							</div>
+						</a>
+					</div>
+				`;
+			}).join('');
+
+			listEl.innerHTML = html;
+
+			listEl.querySelectorAll('.thumb img').forEach((img) => {
+				img.addEventListener('error', () => {
+					markThumbMissing(img);
+				}, { once: true });
+
+				img.addEventListener('load', () => {
+					maybeHideEllipsisThumb(img);
+				}, { once: true });
+			});
+		}
+
+		render();
+	</script>
+</body>
+</html>

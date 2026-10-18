@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+    {% include head_v1.html %}
+    <body>
+        <div class="category">
+          <br>&nbsp;
+          <a class="category-link {% if page.url == node.url %} active{% endif %}" href="/">Home</a>
+          <br><br>
+      <b>CATEGORY</b>
+
+      {% assign split_char = '#' %}
+      {% assign max_length = 0 %}
+
+      {% for s in site.categories %}
+        {% assign name = s | first %}
+        {% assign size = site.categories[name] | size %}
+        {% assign len = size | split: null | size %}
+        {% if max_length < len %}
+          {% assign max_length = len | plus: 0%}
+        {% endif %}
+      {% endfor %}
+
+      {% assign categories = '' | split: "" %}
+      {% for s in site.categories %}
+        {% assign name = s | first %}
+        {% assign size = site.categories[name] | size %}
+        {% assign name = name | split: split_char %}
+
+        {% assign len = size | split: null | size %}
+        {% assign pad = max_length | minus: len %}
+
+        {% for c in (1..pad) %}
+          {% assign size = size | prepend: '0' %}
+        {% endfor %}
+
+        {% assign temp = size | split: split_char | concat: name %}
+
+        {% assign categories = categories | push: temp %}
+      {% endfor %}
+
+      {% assign categories = categories | sort %}
+      {% for category in categories reversed  %}
+        {% capture cat_name %}{{ category | last }}{% endcapture %}
+        {% assign dis_name = cat_name%}
+        {% if dis_name == "gcp" %}
+          {% assign dis_name = "Google Cloud Platform" %}
+        {% endif %}
+
+
+        <li>
+            <a class="category-link {% if page.url == node.url %} active{% endif %}"
+          href="/category/{{cat_name}}">{{dis_name}} <small>({{category[0]}})</small></a>
+        </li>
+      {% endfor %}
+        </div>
+        <div class="content container" style="margin: auto">
+        {{ content }}
+        </div>
+    </body>
+</html>

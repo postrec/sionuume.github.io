@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="노래책">
+  <title>List</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #000;
+      color: #eaeaea;
+      font-family: "Noto Sans KR", "Noto Sans JP", system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    main { max-width: 980px; margin: 0 auto; padding: 64px 24px; }
+    .page-header { margin-bottom: 32px; }
+    h1 { margin: 0; font-size: clamp(28px, 6vw, 40px); }
+    a:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+    #status { margin: 20px 0; color: #aaa; font-size: 14px; }
+    #songs { column-count: 4; column-gap: clamp(16px, 3vw, 32px); }
+    .artist-group { display: inline-block; width: 100%; vertical-align: top; break-inside: avoid; margin-bottom: 28px; overflow-wrap: anywhere; }
+    .artist-name { margin: 0 0 8px; font-size: 17px; font-weight: 600; }
+    .translation { margin-left: 6px; color: #aaa; font-size: 0.72em; font-weight: 400; white-space: nowrap; }
+    .song-list { list-style: none; margin: 0; padding: 0; }
+    .song { margin: 0; font-size: 14px; line-height: 1.35; }
+    .song-link { text-decoration: none; }
+    .song-link:hover, .song-link:focus-visible { text-decoration: underline; }
+    a { color: #eaeaea; text-underline-offset: 4px; }
+    [hidden] { display: none; }
+    @media (max-width: 480px) {
+      main { padding: 40px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1>List</h1>
+    </header>
+    <p id="status" role="status">목록을 불러오는 중입니다.</p>
+    <div id="songs"></div>
+    <noscript><p>노래 목록을 보려면 JavaScript를 활성화해 주세요.</p></noscript>
+  </main>
+  <script>
+    const status = document.getElementById('status');
+    const list = document.getElementById('songs');
+
+    function youtubeUrl(value) {
+      try {
+        const url = new URL(value);
+        const host = url.hostname;
+        const isYouTube = host === 'youtu.be' || host === 'youtube.com' || host.endsWith('.youtube.com');
+        return isYouTube && ['https:', 'http:'].includes(url.protocol) ? url.href : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function renderSongs(songs) {
+      list.replaceChildren();
+      const groups = new Map();
+      for (const song of songs) {
+        if (!groups.has(song.artist)) groups.set(song.artist, []);
+        groups.get(song.artist).push(song);
+      }
+      for (const [artist, artistSongs] of groups) {
+        const section = document.createElement('section');
+        section.className = 'artist-group';
+        const heading = document.createElement('h2');
+        heading.className = 'artist-name';
+        heading.append(`- ${artist}`);
+        if (artistSongs[0].artist_ko) {
+          const translation = document.createElement('small');
+          translation.className = 'translation';
+          translation.textContent = artistSongs[0].artist_ko;
+          heading.append(translation);
+        }
+        const songList = document.createElement('ul');
+        songList.className = 'song-list';
+        songList.setAttribute('role', 'list');
+        for (const song of artistSongs) {
+          const item = document.createElement('li');
+          item.className = 'song';
+          const url = youtubeUrl(song.youtubelink);
+          if (url) {
+            const link = document.createElement('a');
+            link.className = 'song-link';
+            link.href = url;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            link.append(song.title);
+            if (song.title_ko) {
+              const translation = document.createElement('small');
+              translation.className = 'translation';
+              translation.textContent = song.title_ko;
+              link.append(translation);
+            }
+            const artistLabel = song.artist_ko ? `${song.artist} (${song.artist_ko})` : song.artist;
+            const titleLabel = song.title_ko ? `${song.title} (${song.title_ko})` : song.title;
+            link.setAttribute('aria-label', `${artistLabel} - ${titleLabel} YouTube에서 듣기 (새 탭)`);
+            item.append(link);
+          } else {
+            item.append(song.title);
+            if (song.title_ko) {
+              const translation = document.createElement('small');
+              translation.className = 'translation';
+              translation.textContent = song.title_ko;
+              item.append(translation);
+            }
+          }
+          songList.append(item);
+        }
+        section.append(heading, songList);
+        list.append(section);
+      }
+      status.hidden = songs.length > 0;
+      status.textContent = songs.length ? '' : '등록된 곡이 없습니다.';
+    }
+
+    async function loadSongs() {
+      try {
+        const response = await fetch('./list.json');
+        if (!response.ok) throw new Error('목록 요청 실패');
+        const data = await response.json();
+        if (!Array.isArray(data) || !data.every(song =>
+          song && typeof song.artist === 'string' && typeof song.title === 'string' &&
+          typeof song.youtubelink === 'string' &&
+          (song.artist_ko === undefined || typeof song.artist_ko === 'string') &&
+          (song.title_ko === undefined || typeof song.title_ko === 'string')
+        )) throw new Error('목록 형식 오류');
+        renderSongs(data);
+      } catch (error) {
+        status.textContent = '목록을 불러오지 못했습니다. 잠시 후 새로고침해 주세요.';
+        console.error(error);
+      }
+    }
+
+    loadSongs();
+  </script>
+</body>
+</html>

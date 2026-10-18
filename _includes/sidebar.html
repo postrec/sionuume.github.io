@@ -1,0 +1,85 @@
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="{{ site.baseurl }}/">
+          {{ site.title }}
+        </a>
+      </h1>
+      <p class="lead"><small>{{ site.description }}</small></p>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      {% comment %}
+        The code below dynamically generates a sidebar nav of pages with
+        `layout: page` in the front-matter. See readme for usage.
+      {% endcomment %}
+
+      <br>
+      <b><small>CATEGORY</small></b>
+      {% assign split_char = '#' %}
+      {% assign max_length = 0 %}
+
+      {% for s in site.categories %}
+        {% assign name = s | first %}
+        {% assign size = site.categories[name] | size %}
+        {% assign len = size | split: null | size %}
+        {% if max_length < len %}
+          {% assign max_length = len | plus: 0%}
+        {% endif %}
+      {% endfor %}
+
+      {% assign categories = '' | split: "" %}
+      {% for s in site.categories %}
+        {% assign name = s | first %}
+        {% assign size = site.categories[name] | size %}
+        {% assign name = name | split: split_char %}
+
+        {% assign len = size | split: null | size %}
+        {% assign pad = max_length | minus: len %}
+
+        {% for c in (1..pad) %}
+          {% assign size = size | prepend: '0' %}
+        {% endfor %}
+
+        {% assign temp = size | split: split_char | concat: name %}
+
+        {% assign categories = categories | push: temp %}
+      {% endfor %}
+
+      {% assign categories = categories | sort %}
+      {% for category in categories reversed  %}
+        {% capture cat_name %}{{ category | last }}{% endcapture %}
+        {% assign dis_name = cat_name%}
+        {% if dis_name == "gcp" %}
+          {% assign dis_name = "Google Cloud Platform" %}
+        {% endif %}
+
+
+        <li><a class="category-link {% if page.url == node.url %} active{% endif %}"
+          href="/category/{{cat_name}}">{{dis_name}} <small>({{category[0]}})</small></a></li>
+      {% endfor %}
+
+
+      <br>
+      {% for node in pages_list %}
+        {% if node.title != null %}
+          {% if node.layout == "page" %}
+            <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    </nav>
+    <nav class="sidebar-aboutme">
+      <b><small>ABOUT ME</small></b>
+      <br/>
+      <a class="sidebar-aboutme-item{% if page.url == 'about' %} active{% endif %}" href="/about/ko">소개</a>
+      <a class="sidebar-aboutme-item{% if page.url == 'about' %} active{% endif %}" href="/about/ja">紹介</a>
+      <br/>
+    </nav>
+
+    <p><small>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</small></p>
+  </div>
+</div>
