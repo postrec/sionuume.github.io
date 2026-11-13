@@ -204,6 +204,21 @@
 			text-underline-offset: 4px;
 		}
 
+		.portfolio-links {
+			grid-column: 2;
+			display: flex;
+			gap: 16px;
+			margin-top: -4px;
+			font-size: 15px;
+		}
+
+		.row .portfolio-links a {
+			display: inline;
+			color: #b9b9b9;
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+
 		.empty {
 			padding: 18px 0;
 			color: #9a9a9a;
@@ -275,6 +290,14 @@
 
 	<script>
 		const portfolioData = [
+			{
+				title: "블루아카이브 5주년 페스티벌",
+				artist: "아카이브밴드",
+				youtubeLink: "https://www.youtube.com/watch?v=LHjOwvjrrVE&t=13019s",
+				coverImage: "assets/images/work/058_blue-archive-5th-festival_LHjOwvjrrVE.jpg",
+				description: "Key2",
+				html: '<a href="https://www.youtube.com/watch?v=LHjOwvjrrVE&t=13019s" target="_blank" rel="noopener noreferrer">1일차</a><a href="https://www.youtube.com/watch?v=Xitk8QV_n_g" target="_blank" rel="noopener noreferrer">2일차</a>',
+			},
 			{
 				title: "アンノウン・マザーグース",
 				artist: "白雪",
@@ -840,6 +863,7 @@
 								<p class="desc"><span class="dot"></span><span>${desc}</span></p>
 							</div>
 						</a>
+						${item.html ? `<div class="portfolio-links">${item.html}</div>` : ''}
 					</div>
 				`;
 			}).join('');
