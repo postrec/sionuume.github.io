@@ -191,7 +191,7 @@
 		.row a {
 			color: inherit;
 			text-decoration: none;
-			display: contents;
+			display: block;
 		}
 
 		.row:hover .thumb {
@@ -205,10 +205,9 @@
 		}
 
 		.portfolio-links {
-			grid-column: 2;
 			display: flex;
 			gap: 16px;
-			margin-top: -4px;
+			margin-top: 10px;
 			font-size: 15px;
 		}
 
@@ -857,13 +856,15 @@
 					<div class="row">
 						<a href="${link}" target="_blank" rel="noopener noreferrer">
 							<div class="${thumbClass}">${thumbInner}</div>
-							<div class="meta">
+						</a>
+						<div class="meta">
+							<a href="${link}" target="_blank" rel="noopener noreferrer">
 								<p class="name">${title}${badge}</p>
 								<p class="artist">${artist}</p>
 								<p class="desc"><span class="dot"></span><span>${desc}</span></p>
-							</div>
-						</a>
-						${item.html ? `<div class="portfolio-links">${item.html}</div>` : ''}
+							</a>
+							${item.html ? `<div class="portfolio-links">${item.html}</div>` : ''}
+						</div>
 					</div>
 				`;
 			}).join('');
